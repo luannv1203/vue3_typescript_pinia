@@ -20,7 +20,7 @@ export default defineComponent({
   computed: {
     filteredRoutes () {
       // var result = this.routes.filter(temp => temp.meta.requiresAuth === true && RoleCheckingService.checkRole(this.user, temp))
-      var result = this.$router.options.routes.filter((temp: any) => !temp.hidden)
+      var result = this.$router.options.routes.filter((temp: any) => temp.meta.requiresAuth === true && !temp.hidden)
       result.forEach((item: any) => {
         if (item.children?.length > 0) {
           item.children = item.children.filter((temp: any) => !temp.hidden)

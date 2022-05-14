@@ -5,15 +5,9 @@ import router from './router'
 import RouterInterceptor from './plugins/router-interceptor'
 
 // Import Bootstrap and BootstrapVue CSS files (order is important)
-import "bootstrap/dist/css/bootstrap.min.css"
 import 'ant-design-vue/dist/antd.css';
 
-import { library, dom } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import { fab } from '@fortawesome/free-brands-svg-icons';
-library.add(fas, fab)
-dom.watch()
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 //Pinia store
 import { createPinia } from 'pinia'
