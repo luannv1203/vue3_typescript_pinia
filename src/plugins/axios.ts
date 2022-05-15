@@ -7,17 +7,15 @@ const http = axios.create({
 })
 
 export default http
-
+const token = LocalStorage.getToken()
+if (token) {
+  http.defaults.headers.common['Authorization'] = `Bearer ${token}`
+}
 http.interceptors.request.use(
   async config => {
-    const token = LocalStorage.getToken()
-    if (token) {
-      config.headers!.Authorization = 'Bearer ' + token
-    }
     if (config.url?.indexOf('login') === -1) {
-      delete config.headers!['Authorization']
+      delete http.defaults.headers.common['Authorization']
     }
-
     return config
   },
   error => {
@@ -31,7 +29,9 @@ http.interceptors.response.use(
     const _rs: ResponseData = response.data
     if (response.data && response.data.data) _rs.data = response.data.data
     _rs.status = response.data.status === 'Success'
-    _rs.status ? commonStore.showSuccessMess(_rs.message) : commonStore.showErrorMess(_rs.message)
+    if (_rs.message) {
+      _rs.status ? commonStore.showSuccessMess(_rs.message) : commonStore.showErrorMess(_rs.message)
+    }
     return _rs
   },
   error => {
