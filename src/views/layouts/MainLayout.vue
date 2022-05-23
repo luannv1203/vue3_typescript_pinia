@@ -6,6 +6,7 @@
         {{route.meta?.title}}
       </router-link>
     </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -13,9 +14,20 @@
 import { defineComponent } from 'vue'
 export default defineComponent({
   setup() {
+    let num = 0
+    return {
+      num
+    }
   },
   created() {
     console.log(this.$router.options);
+    this.num = 10
+  },
+  mounted() {
+    this.$emitter.on('toggle', (e: any) => {
+      console.log(e);
+    })
+    
   },
   computed: {
     filteredRoutes () {

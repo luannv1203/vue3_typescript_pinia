@@ -1,4 +1,4 @@
-export type ResponseData = {
+export interface ResponseData {
   data: any,
   status: boolean,
   message: string,

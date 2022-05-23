@@ -3,6 +3,7 @@
     "target": "esnext",
     "module": "esnext",
     "importHelpers": true,
+    "noImplicitThis": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

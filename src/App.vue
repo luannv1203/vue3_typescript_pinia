@@ -3,11 +3,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, provide } from 'vue'
 
 export default defineComponent({
   setup() {
-    
+    provide('message', 'Message From App')
   },
   created() {
     if (this.$route?.meta?.title) {

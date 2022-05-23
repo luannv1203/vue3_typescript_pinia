@@ -12,6 +12,12 @@ const LocalStorage = {
   },
   getToken() {
     return localStorage.getItem(CONSTANT.JWT)
+  },
+  removeItem(key: string) {
+    return localStorage.removeItem(key)
+  },
+  removeToken() {
+    return localStorage.removeItem(CONSTANT.JWT)
   }
 }
 
