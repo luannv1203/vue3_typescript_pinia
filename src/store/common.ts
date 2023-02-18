@@ -1,17 +1,19 @@
 import { defineStore } from 'pinia';
-import { notification } from 'ant-design-vue'
+import { ElNotification } from 'element-plus';
 
 export const useCommonStore = defineStore('common', {
   state: () => ({}),
   actions: {
     showSuccessMess(message: String) {
-      notification.success({
-        message: message
+      ElNotification({
+        message: `${message}`,
+        type: 'success',
       })
     },
     showErrorMess(message: String) {
-      notification.error({
-        message: message
+      ElNotification({
+        message: `${message}`,
+        type: 'error',
       })
     },
   },

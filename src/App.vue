@@ -9,11 +9,21 @@ export default defineComponent({
   setup() {
     provide('message', 'Message From App')
   },
+  watch: {
+    $route(n) {
+      this.setTitle()
+    }
+  },
   created() {
-    if (this.$route?.meta?.title) {
-      const title: string = this.$route.meta.title + ' | Nguyen Van Luan'
-      console.log(title);
-      document.title = title
+    
+  },
+  methods: {
+    setTitle() {
+      if (this.$route?.meta?.title) {
+        const title: string = this.$route.meta.title + ' | Nguyen Van Luan'
+        console.log(title);
+        document.title = title
+      }
     }
   }
 })

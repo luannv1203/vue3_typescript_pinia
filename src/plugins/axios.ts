@@ -11,13 +11,13 @@ http.interceptors.request.use(
   config => {
     config.headers = {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      // 'Cookie': document.cookie
     }
     const token = LocalStorage.getToken()
     if (token) {
       config.headers!['Authorization'] = `Bearer ${token}`
     }
-    
     if (config.url?.indexOf('login') === -1) {
       delete http.defaults.headers.common['Authorization']
     }
@@ -32,7 +32,7 @@ http.interceptors.response.use(
   response => {
     const commonStore = useCommonStore()
     response.data.status = response.data.status === 'Success'
-    const _rs = response.data
+    const _rs: ResponseData = new ResponseData(response.data)
     console.log(_rs);
     
     if (_rs.message) {

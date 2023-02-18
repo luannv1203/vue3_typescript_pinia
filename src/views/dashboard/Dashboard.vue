@@ -17,7 +17,7 @@
     </template>
   </SlotExample>
   <ul>
-    <li v-for="(user, index) in listUsers" :key="index">{{user.fullName}}</li>
+    <li v-for="(user, index) in listUsers" :key="index">{{user.getEmail()}} - {{user.getFullName()}} - {{user.email}}</li>
   </ul>
   <button @click="eventBus">Event Bus</button>
 </template>
@@ -26,6 +26,8 @@ import { computed } from 'vue'
 import { useUserStore } from '../../store/user'
 import LogOutButton from './components/LogOutButton.vue'
 import SlotExample from './components/SlotExample.vue'
+import { collection, getDocs } from "firebase/firestore"; 
+import { db } from '@/main'
 export default {
   components: {
     LogOutButton,
@@ -34,6 +36,7 @@ export default {
   setup() {
     const storeUser = useUserStore()
     let listUsers = computed(() => storeUser.getListUser)
+    
     const fetchData = () => {
       return storeUser.fetchListUser()
     }
@@ -46,8 +49,12 @@ export default {
       ahihi
     }
   },
-  created() {
+  async created() {
     this.fetchData()
+    // const docRef = await getDocs(collection(db, "books"));
+    // docRef.forEach((doc) => {
+    //   console.log(`${doc.id} => ${doc.metadata}`);
+    // });
   },
   methods: {
     eventBus() {

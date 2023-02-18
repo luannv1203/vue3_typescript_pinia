@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import LocalStorage from '../utils/LocalStorage'
 import AuthService from '../api/AuthService'
 import router from '../router'
+import { inject } from 'vue'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({

@@ -1,17 +1,19 @@
-import VueRouter, { createRouter, createWebHistory } from 'vue-router'
+import VueRouter, { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 //Import layouts
-import MainLayout from '../views/layouts/MainLayout.vue'
+const MainLayout = () => import('../views/layouts/MainLayout.vue') 
 
 //import pages
-import LoginPage from '../views/login/Login.vue'
-import DashboardPage from '../views/dashboard/Dashboard.vue'
+const LoginPage = () => import('../views/login/Login.vue') 
+const DashboardPage = () => import('../views/dashboard/Dashboard.vue')
+const ProjectPage = () => import('../views/pages/project/Project.vue')
 
 const routes = [
   {
     path: '/login',
     name: 'Login',
     component: LoginPage,
+    hidden: true,
     meta: {
       title: 'Login'
     }
@@ -29,6 +31,15 @@ const routes = [
       {
         path: '',
         name: 'dashboard',
+        component: ProjectPage,
+        meta: {
+          requiresAuth: true,
+          title: 'Dashboard'
+        }
+      },
+      {
+        path: 'language',
+        name: 'language',
         component: DashboardPage,
         meta: {
           requiresAuth: true,

@@ -1,19 +1,21 @@
+import { User } from '@/model/user';
 import { defineStore } from 'pinia';
 import UserService from '../api/UserService';
-
+interface UserState {
+  listUser: User[]
+}
 export const useUserStore = defineStore('user',{
-  state: () => ({
+  state: (): UserState => ({
     listUser: []
   }),
   getters: {
-    getListUser: (state) => state.listUser
+    getListUser: (state): User[] => state.listUser as User[]
   },
   actions: {
     async fetchListUser(data?: Map<string, any>) {
       const rs = await UserService.getUsers(data)
-      console.log(rs)
       if(rs && rs.status) {
-        this.listUser = rs.data
+        this.listUser = rs.data.map((item: any) => new User(item))
       }
     }
   }
