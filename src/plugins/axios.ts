@@ -31,9 +31,7 @@ http.interceptors.request.use(
 http.interceptors.response.use(
   response => {
     const commonStore = useCommonStore()
-    response.data.status = response.data.status === 'Success'
     const _rs: ResponseData = new ResponseData(response.data)
-    console.log(_rs);
     
     if (_rs.message) {
       _rs.status ? commonStore.showSuccessMess(_rs.message) : commonStore.showErrorMess(_rs.message)

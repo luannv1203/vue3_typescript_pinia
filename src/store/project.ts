@@ -1,8 +1,8 @@
-import { User } from '@/model/user';
+import { Project } from '@/model/project';
 import { defineStore } from 'pinia';
 import ProjectService from '../api/ProjectService';
 interface ProjectState {
-  listProject: [],
+  listProject: Project[],
   project: {}
 }
 export const useProjectStore = defineStore('project',{
@@ -11,14 +11,14 @@ export const useProjectStore = defineStore('project',{
     project: {}
   }),
   getters: {
-    getListProject: (state) => state.listProject
+    getListProject: (state): Project[] => state.listProject as Project[],
+    getProjectDetail: (state): Project => new Project(state.project),
   },
   actions: {
     async fetchListProject() {
       const rs = await ProjectService.getListAllProject()
-      console.log('asdadasdasdas' + rs);
       if(rs && rs.status) {
-        this.listProject = rs.data
+        this.listProject = rs.data.map((e: any) => new Project(e))
       }
     },
 

@@ -1,0 +1,44 @@
+.dashboard {
+  &-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .info {
+      width: calc(100%/4 - 20px);
+      background: #343a40;
+      color: #FFF;
+      box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+      border-radius: 0.25rem;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      &-icon {
+        width: 70px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.25rem;
+        font-size: 28px;
+      }
+      &-content {
+        padding: 0 10px;
+        height: 64px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-self: start;
+        text-align: left;
+        div {
+          &:first-child {
+            font-weight: 500;
+          }
+          &:last-child {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}

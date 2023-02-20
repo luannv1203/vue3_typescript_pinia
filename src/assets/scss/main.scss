@@ -1,21 +1,27 @@
-@import './_sidebar';
+@import './layout/_sidebar';
+@import './layout/_layout';
+@import './layout/_header';
+@import './pages/_dashboard';
 
 * {
   box-sizing: border-box;
 }
 
 :root {
-  --primary_color: rgba(255,255,255,.8);
+  --primary_color: rgba(255,255,255, .75);
   --main_bg_color: #343a40;
 }
 #app {
   margin: 0;
+  color: var(--primary_color) !important;
+  font-family: 'Source Sans Pro', sans-serif !important;
 }
 body {
   font-size: 16px;
-  color: var(--primary_color);
+  color: var(--primary_color) !important;
   background: var(--main_bg_color);
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
+  margin: 0;
 }
 
 ul {
@@ -26,4 +32,7 @@ ul {
 a {
   text-decoration: unset;
   color: var(--primary_color);
+}
+h1 {
+  margin: 0;
 }

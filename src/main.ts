@@ -7,9 +7,15 @@ import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons';
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-library.add(fab, fas)
+
+library.add(
+  fab,
+  fas,
+  far
+)
 dom.watch()
 
 import ElementPlus from 'element-plus'
@@ -21,9 +27,7 @@ import { createPinia } from 'pinia'
 const store = createPinia()
 
 //Use EventBus in vue 3
-import mitt from 'mitt';
-import VueCookies from 'vue-cookies'
-const emitter = mitt();
+import { emitter } from './utils/EventBus';
 const firebaseConfig = {
   apiKey: "AIzaSyAqbYDyWOGWVDhb5I4sG1M3wuD06gMO9XA",
   authDomain: "brain-loss.firebaseapp.com",
@@ -37,6 +41,8 @@ const firebaseConfig = {
 
 const firebase = initializeApp(firebaseConfig);
 export const db = getFirestore(firebase);
+
+import VueCookies from 'vue-cookies'
 
 const app = createApp(App)
   .use(router)

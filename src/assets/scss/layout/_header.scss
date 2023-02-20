@@ -1,0 +1,52 @@
+.el-header {
+  padding: 0 !important;
+  margin-left: 250px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8125rem 25px;
+  min-height: 57px;
+  border-bottom: 1px solid #4b545c;
+  &-left {
+    display: flex;
+    align-items: center;
+    .toggle-menu {
+      background: unset;
+      border: unset;
+      color: var(--primary_color);
+      font-size: 22px;
+    }
+    .link {
+      margin-left: 25px;
+      font-weight: 600;
+    }
+  }
+  &-right {
+    display: flex;
+    align-items: center;
+    ul {
+      display: flex;
+      li {
+        margin-left: 15px;
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+.header-bottom {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8125rem 25px;
+  align-items: center;
+  h1 {
+    font-size: 28px;
+  }
+  .el-breadcrumb {
+    font-size: 16px;
+    &__inner {
+      color: var(--primary_color) !important;
+    }
+  }
+}

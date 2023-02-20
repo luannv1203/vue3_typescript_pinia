@@ -1,66 +1,94 @@
 <template>
-  ahihihihi
-  <LogOutButton>
-    hihihi
-    bhihihi
-  </LogOutButton>
-  <SlotExample>
-    <template #slot-1>
-      <div>Slot-1</div>
-    </template>
-    <template #default="defaultProps">
-      {{defaultProps.message}}
-      <div>Default</div>
-    </template>
-    <template #slot-3>
-      <div>Slot-3</div>
-    </template>
-  </SlotExample>
-  <ul>
-    <li v-for="(user, index) in listUsers" :key="index">{{user.getEmail()}} - {{user.getFullName()}} - {{user.email}}</li>
-  </ul>
-  <button @click="eventBus">Event Bus</button>
+  <div class="dashboard">
+    {{ state.title }}
+    <div class="dashboard-info">
+      <DashboardInfo
+        v-model:title="state.title"
+        :value="'10 %'"
+        :class-icon="['fas', 'gear']"
+        :color="'#17a2b8'"
+      />
+      <DashboardInfo
+        title="Like"
+        :value="'41,410'"
+        :class-icon="['fas', 'thumbs-up']"
+        :color="'#dc3545'"
+      />
+      <DashboardInfo
+        :title="'Sales'"
+        :value="'760'"
+        :class-icon="['fas', 'cart-shopping']"
+        :color="'#28a745'"
+      />
+      <DashboardInfo
+        :title="'New Members'"
+        :value="'2,000'"
+        :class-icon="['fas', 'gear']"
+        :color="'#ffc107'"
+      />
+    </div>
+  </div>
 </template>
 <script lang="ts">
-import { computed } from 'vue'
-import { useUserStore } from '../../store/user'
+import { defineComponent, computed, reactive } from 'vue'
+// import { useUserStore } from '../../store/user'
 import LogOutButton from './components/LogOutButton.vue'
 import SlotExample from './components/SlotExample.vue'
-import { collection, getDocs } from "firebase/firestore"; 
-import { db } from '@/main'
-export default {
+import { useBus } from '../../utils/EventBus'
+import DashboardInfo from './components/DashboardInfo.vue'
+
+export default defineComponent({
   components: {
     LogOutButton,
-    SlotExample
+    SlotExample,
+    DashboardInfo
   },
   setup() {
-    const storeUser = useUserStore()
-    let listUsers = computed(() => storeUser.getListUser)
+    const {bus} = useBus()
+    // const storeUser = useUserStore()
+
+    const state = reactive({
+      a1: 10,
+      a2: 20,
+      toggleSide: false,
+      title: 'CPU Traffic'
+    });
     
-    const fetchData = () => {
-      return storeUser.fetchListUser()
+    // const fetchData = () => {
+    //   return storeUser.fetchListUser()
+    // }
+    let a3 = computed(() => state.a1 + state.a2, {
+      onTrack(e) {
+        console.log(`OnTrack ${e.oldValue}`);
+      },
+      onTrigger(e) {
+        console.log(`OnTrigger ${e.oldValue}`);
+      }
+    })
+
+    const eventBus = () => {
+      state.toggleSide = !state.toggleSide
+      bus.emit('toggle', state.toggleSide);
     }
-    let toggleSide = false;
-    const ahihi = 'Logout Change'
+    const changea1 = () => {
+      state.a1 += 10
+    }
+    const changea2 = () => {
+      state.a2 += 5
+    }
     return {
-      listUsers,
-      fetchData,
-      toggleSide,
-      ahihi
+      state,
+      a3,
+      eventBus,
+      changea1,
+      changea2
     }
   },
   async created() {
-    this.fetchData()
-    // const docRef = await getDocs(collection(db, "books"));
-    // docRef.forEach((doc) => {
-    //   console.log(`${doc.id} => ${doc.metadata}`);
-    // });
+    // this.fetchData()
   },
-  methods: {
-    eventBus() {
-      this.toggleSide = !this.toggleSide
-      this.$emitter.emit('toggle', this.toggleSide);
-    }
-  }
-}
+  updated() {
+    console.log('Updated')
+  },
+})
 </script>

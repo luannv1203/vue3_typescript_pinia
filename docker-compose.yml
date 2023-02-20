@@ -1,8 +1,0 @@
-your_vuejs_client:
-    build: /path/to/vuejs-app
-    restart: always
-    environment:
-        NODE_ENV: 'hihi'
-        VITE_API_URL: "http://admin-api.portalservice.test/api/v1"
-    ports:
-        - "8080:80"

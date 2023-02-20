@@ -7,6 +7,7 @@ const MainLayout = () => import('../views/layouts/MainLayout.vue')
 const LoginPage = () => import('../views/login/Login.vue') 
 const DashboardPage = () => import('../views/dashboard/Dashboard.vue')
 const ProjectPage = () => import('../views/pages/project/Project.vue')
+const LanguagePage = () => import('../views/pages/language/Language.vue')
 
 const routes = [
   {
@@ -22,7 +23,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: MainLayout,
-    redirect: { name: 'dashboard' },
+    redirect: { name: 'Dashboard' },
     meta: {
       requiresAuth: true,
       title: 'Homepage'
@@ -30,20 +31,29 @@ const routes = [
     children: [
       {
         path: '',
-        name: 'dashboard',
-        component: ProjectPage,
+        name: 'Dashboard',
+        component: DashboardPage,
         meta: {
           requiresAuth: true,
           title: 'Dashboard'
         }
       },
       {
-        path: 'language',
-        name: 'language',
-        component: DashboardPage,
+        path: 'project',
+        name: 'Project',
+        component: ProjectPage,
         meta: {
           requiresAuth: true,
-          title: 'Dashboard'
+          title: 'Project'
+        }
+      },
+      {
+        path: 'language',
+        name: 'language',
+        component: LanguagePage,
+        meta: {
+          requiresAuth: true,
+          title: 'Language'
         }
       }
     ]
